@@ -15,7 +15,7 @@ async function handlePoints(interaction) {
     .setColor(0x3498db)
     .setThumbnail(targetUser.displayAvatarURL());
 
-  await interaction.reply({ embeds: [embed] });
+  await interaction.reply({ embeds: [embed], ephemeral: true });
 }
 
 async function handleLeaderboard(interaction) {

@@ -1,11 +1,13 @@
 const { pool } = require('./db');
 
+const WELCOME_BONUS = 100;
+
 async function getPoints(userId, guildId) {
-  const [rows] = await pool.query(
+  await pool.query(
     `INSERT INTO users (user_id, guild_id, points, last_seen)
-     VALUES (?, ?, 100, NOW())
+     VALUES (?, ?, ?, NOW())
      ON DUPLICATE KEY UPDATE last_seen = NOW()`,
-    [userId, guildId]
+    [userId, guildId, WELCOME_BONUS]
   );
 
   const [users] = await pool.query(
@@ -21,7 +23,7 @@ async function addPoints(userId, guildId, amount) {
     `INSERT INTO users (user_id, guild_id, points, last_seen)
      VALUES (?, ?, ?, NOW())
      ON DUPLICATE KEY UPDATE points = points + ?, last_seen = NOW()`,
-    [userId, guildId, amount, amount]
+    [userId, guildId, WELCOME_BONUS + amount, amount]
   );
 }
 

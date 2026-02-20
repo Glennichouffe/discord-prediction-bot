@@ -130,10 +130,10 @@ async function getBetSummary(predictionId) {
 
   const row = rows[0];
   return {
-    totalA: row.totalA ?? 0,
-    totalB: row.totalB ?? 0,
-    countA: Number(row.countA) ?? 0,
-    countB: Number(row.countB) ?? 0,
+    totalA: Number(row.totalA ?? 0),
+    totalB: Number(row.totalB ?? 0),
+    countA: Number(row.countA ?? 0),
+    countB: Number(row.countB ?? 0),
   };
 }
 
